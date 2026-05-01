@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Handmade Ceramics</title>
+
+  <!-- Papa Parse -->
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+  <style>
+    body {
+      font-family: Arial;
+      padding: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    .sold {
+      opacity: 0.5;
+    }
+
+    img {
+      width: 100%;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>Handmade Ceramics</h1>
+
+<div id="gallery" class="grid"></div>
+
+<script>
+const sheetURL = "PASTE_YOUR_LINK_HERE";
+
+Papa.parse(sheetURL, {
+  download: true,
+  header: true,
+  complete: function(results) {
+    const gallery = document.getElementById("gallery");
+
+    results.data.forEach(item => {
+      if (!item.name) return;
+
+      const available = item.available.toLowerCase() === "true";
+
+      const card = document.createElement("div");
+      card.className = "card " + (available ? "" : "sold");
+
+      card.innerHTML = `
+        <img src="${item.image}" />
+        <h3>${item.name}</h3>
+        <p>$${item.price}</p>
+        <p>${available ? "Available" : "Sold"}</p>
+      `;
+
+      gallery.appendChild(card);
+    });
+  }
+});
+</script>
+
+</body>
+</html>
