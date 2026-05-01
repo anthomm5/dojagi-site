@@ -44,6 +44,7 @@
 <div id="gallery" class="grid"></div>
 
 <script>
+console.log("script loaded");
 const sheetURL = "https://docs.google.com/spreadsheets/d/1V8oGEO9bo69H4MvcLHY9mn2rbtzNd63BMlcDT74Ei-A/export?format=csv";
 
 Papa.parse(sheetURL, {
@@ -54,9 +55,6 @@ Papa.parse(sheetURL, {
 
     results.data.forEach(item => {
       if (!item.Name) return;
-
-      console.log(item.Image);
-
 
       const available = item.Available.toLowerCase() === "true";
 
