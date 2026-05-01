@@ -51,17 +51,17 @@ Papa.parse(sheetURL, {
     const gallery = document.getElementById("gallery");
 
     results.data.forEach(item => {
-      if (!item.name) return;
+      if (!item.Name) return;
 
-      const available = item.available.toLowerCase() === "true";
+      const available = item.Available.toLowerCase() === "true";
 
       const card = document.createElement("div");
       card.className = "card " + (available ? "" : "sold");
 
       card.innerHTML = `
-        <img src="${item.image}" />
-        <h3>${item.name}</h3>
-        <p>$${item.price}</p>
+        <img src="${item.Image}" />
+        <h3>${item.Name}</h3>
+        <p>$${item.Price}</p>
         <p>${available ? "Available" : "Sold"}</p>
       `;
 
